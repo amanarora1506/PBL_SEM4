@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="planner-wrapper">
+    <div class="planner-container glass-panel">
+        <div class="planner-header">
+            <h2>Project Parameters</h2>
+            <p>Define your spatial requirements to generate deterministic layouts.</p>
+        </div>
+        
+        <form id="plannerForm">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Plot Length (ft)</label>
+                    <input type="number" id="plot_length" name="length" placeholder="E.g. 50" required>
+                </div>
+                <div class="input-group">
+                    <label>Plot Width (ft)</label>
+                    <input type="number" id="plot_width" name="width" placeholder="E.g. 30" required>
+                </div>
+                
+                <div class="input-group full-width" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                    <div style="padding: 1rem; background: rgba(99, 102, 241, 0.1); border: 1px dashed var(--primary-color); border-radius: 8px; text-align: center;">
+                        <span style="color: #94a3b8; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Total Plot Area</span><br>
+                        <span id="total_area_display" style="font-size: 1.5rem; font-weight: 800; color: white;">0 sq.ft</span>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Building Type</label>
+                    <select name="type" id="b_type">
+                        <option value="Residential">Residential</option>
+                        <option value="Commercial">Commercial</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>BHK / Offices</label>
+                    <input type="number" name="bhk" value="2" min="1" required>
+                </div>
+                <div class="input-group">
+                    <label>Washrooms</label>
+                    <input type="number" name="washrooms" value="2" min="1" required>
+                </div>
+                <div class="input-group">
+                    <label>Parking Requirement</label>
+                    <select name="parking">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="input-group full-width" style="margin-top: 20px;">
+                <label>Extra Rooms (Comma separated)</label>
+                <input type="text" name="extra_rooms" placeholder="E.g. Study, Gym, Store, Home Theatre">
+            </div>
+            
+            <div class="form-actions" style="margin-top: 30px; text-align: right;">
+                <button type="button" class="btn primary-btn" id="generateBtn">Generate Layout</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}

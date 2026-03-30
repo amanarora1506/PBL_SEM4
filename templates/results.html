@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="results-layout">
+    <aside class="sidebar glass-panel">
+        <div class="sidebar-section">
+            <h3>Generated Layouts</h3>
+            <div id="layout-options" class="layout-options">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+        
+        <div class="sidebar-section metrics-section">
+            <h3>Zone Allocation</h3>
+            <ul id="room-list" class="room-list">
+                <!-- Dynamically populated -->
+            </ul>
+        </div>
+    </aside>
+    
+    <main class="visualization-area">
+        <header class="vis-header glass-panel">
+            <div class="view-toggles">
+                <button class="toggle-btn active" id="btn-2d">2D Blueprint</button>
+                <button class="toggle-btn" id="btn-3d">3D Model Overview</button>
+            </div>
+            <div class="layout-score" id="score-display">
+                Score: <span class="gradient-text">92</span>
+            </div>
+        </header>
+
+        <div class="vis-container glass-panel">
+            <!-- 2D Canvas View -->
+            <div id="view-2d" class="view-layer active-layer">
+                <canvas id="blueprint-canvas"></canvas>
+            </div>
+            
+            <!-- 3D Three.js View -->
+            <div id="view-3d" class="view-layer hidden-layer">
+                <div id="three-container"></div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Send the plot dimensional data to script.js -->
+<script>
+    window.plotLength = {{ request.args.get('l', 50) }};
+    window.plotWidth = {{ request.args.get('w', 30) }};
+</script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}
